@@ -32,6 +32,3 @@ class BaseUser(BaseModel):
     class Meta:
         abstract = True
 
-    def __str__(self) -> str:
-        """Representation method."""
-        return self.user.username

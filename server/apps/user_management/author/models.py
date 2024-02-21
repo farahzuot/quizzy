@@ -19,6 +19,11 @@ class Author(BaseUser):
         null=True,
         related_name="author",
     )
+
     class Meta(object):
         verbose_name = 'Author'
         verbose_name_plural = 'Authors'
+
+    def __str__(self) -> str:
+        """Representation method."""
+        return self.user.username if self.user else str(self.id)
