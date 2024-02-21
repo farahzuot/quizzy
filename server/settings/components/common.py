@@ -27,6 +27,8 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'server.apps.user_management.author',
     'server.apps.user_management.participant',
     'server.apps.user_management.user',
+    'server.apps.quiz',
+    'server.apps.result',
 
     # Default django apps:
     'django.contrib.auth',

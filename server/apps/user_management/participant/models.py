@@ -19,6 +19,11 @@ class Participant(BaseUser):
         null=True,
         related_name="participant",
     )
+
     class Meta(object):
         verbose_name = 'Participant'
         verbose_name_plural = 'Participants'
+
+    def __str__(self) -> str:
+        """Representation method."""
+        return self.user.username if self.user else str(self.id)
