@@ -17,6 +17,8 @@ from django.views.generic import TemplateView
 from health_check import urls as health_urls
 
 from server.apps.main import urls as main_urls
+from server.apps.quiz import urls as quiz_urls
+
 from server.apps.main.views import MainView
 
 admin.autodiscover()
@@ -24,6 +26,7 @@ admin.autodiscover()
 urlpatterns = [
     # Apps:
     path('main/', include(main_urls, namespace='main')),
+    path('quiz/', include(quiz_urls, namespace='quiz')),
 
     # Health checks:
     path('health/', include(health_urls)),

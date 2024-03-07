@@ -9,7 +9,7 @@ from _keenthemes.libs.theme import KTTheme
 class MainView(TemplateView):
     # Default template file
     # Refer to dashboards/urls.py file for more pages and template files
-    template_name = 'index.html'
+    template_name = 'main/index.html'
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
