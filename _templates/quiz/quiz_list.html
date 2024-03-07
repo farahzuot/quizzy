@@ -1,0 +1,26 @@
+{% extends 'layout/default.html' %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-3 p-5">
+      <a href="{% url 'quiz:create_quiz' %}" class="btn btn-dark mt-4" id="">Create Quiz</a>
+    </div>
+  </div>
+    <div class="row">
+    <h1>Quiz List</h1>
+    <ul>
+        {% for quiz in quizzes %}
+            <li>{{ quiz.title }}</li>
+        {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+
+{% endblock content %}

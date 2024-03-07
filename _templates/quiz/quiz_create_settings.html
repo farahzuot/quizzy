@@ -1,0 +1,17 @@
+{% extends 'layout/default.html' %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block content %}
+    <h1>Create Quiz - Step 1: Quiz Settings</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Next</button>
+    </form>
+
+
+
+{% endblock content %}

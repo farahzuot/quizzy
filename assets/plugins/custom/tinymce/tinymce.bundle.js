@@ -52877,28 +52877,6 @@ tinymce.IconManager.add('default', {
 
     var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
 
-    function Plugin () {
-      global.add('contextmenu', function () {
-      });
-    }
-
-    Plugin();
-
-}());
-
-/**
- * Copyright (c) Tiny Technologies, Inc. All rights reserved.
- * Licensed under the LGPL or a commercial license.
- * For LGPL see License.txt in the project root for license information.
- * For commercial licenses see https://www.tiny.cloud/
- *
- * Version: 5.10.7 (2022-12-06)
- */
-(function () {
-    'use strict';
-
-    var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
-
     var typeOf = function (x) {
       var t = typeof x;
       if (x === null) {
@@ -53333,6 +53311,28 @@ tinymce.IconManager.add('default', {
       global.add('directionality', function (editor) {
         register$1(editor);
         register(editor);
+      });
+    }
+
+    Plugin();
+
+}());
+
+/**
+ * Copyright (c) Tiny Technologies, Inc. All rights reserved.
+ * Licensed under the LGPL or a commercial license.
+ * For LGPL see License.txt in the project root for license information.
+ * For commercial licenses see https://www.tiny.cloud/
+ *
+ * Version: 5.10.7 (2022-12-06)
+ */
+(function () {
+    'use strict';
+
+    var global = tinymce.util.Tools.resolve('tinymce.PluginManager');
+
+    function Plugin () {
+      global.add('contextmenu', function () {
       });
     }
 

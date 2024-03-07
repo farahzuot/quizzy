@@ -5,7 +5,7 @@ from server.apps.user_management.author.models import Author
 
 
 class Quiz(BaseModel):
-    author = models.OneToOneField(Author, on_delete=models.CASCADE, related_name='quiz_author')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='quiz_author')
     title = models.CharField(max_length=100)
     description = models.TextField()
     passing_score = models.PositiveIntegerField(blank=True, null=True)
@@ -30,9 +30,10 @@ class Question(BaseModel):
     ]
 
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
-    question_type = models.CharField(max_length=2, choices=QUESTION_TYPES)
+    question_type = models.CharField(max_length=2, choices=QUESTION_TYPES, default=TRUE_FALSE)
     question_text = models.TextField()
     marks = models.PositiveIntegerField(blank=True, null=True)
+    tf_correct_answer = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.question_text
@@ -44,4 +45,4 @@ class Option(BaseModel):
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.option_text}'s answer to {self.question.question_text}"
+        return f"{self.option_text}"

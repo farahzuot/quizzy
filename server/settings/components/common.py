@@ -58,7 +58,7 @@ MIDDLEWARE: Tuple[str, ...] = (
     'server.settings.components.logging.LoggingContextVarsMiddleware',
 
     # Content Security Policy:
-    'csp.middleware.CSPMiddleware',
+    # 'csp.middleware.CSPMiddleware',
 
     # Django:
     'django.middleware.security.SecurityMiddleware',
@@ -134,6 +134,7 @@ STATIC_URL = 'assets/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'assets',
+    BASE_DIR / 'static',
 ]
 
 STATICFILES_FINDERS = (

@@ -1,0 +1,122 @@
+{% extends 'layout/default.html' %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block content %}
+    <h1>Create Quiz - Step 2: Add Questions</h1>
+
+<form method="post" id="main_form">
+    {% csrf_token %}
+  <div class="form-group" id="">
+      <div class="form-group mt-2">
+          <div id="step1"  class="step">
+            <label class="form-label">Question Type</label>
+              <input type="radio" name="{{ question_form.question_type.name }}" class="form-check-input"
+                     value="{{ question_form.instance.MULTIPLE_CHOICE }}"
+                     {% if question_form.instance.question_type == question_form.instance.MULTIPLE_CHOICE %} checked {% endif %} />
+              <label class="form-check-label">Multiple Choice</label>
+              <input type="radio" name="{{ question_form.question_type.name }}" class="form-check-input"
+                     value="{{ question_form.instance.TRUE_FALSE }}"
+                     {% if question_form.instance.question_type == question_form.instance.TRUE_FALSE %} checked {% endif %} />
+              <label class="form-check-label">True/False</label>
+              {{ question_form.question_type.errors }}
+              <button type="button" class="btn btn-primary next_step">Next</button>
+          </div>
+          <div id="step2" class="step d-none" >
+            <div class="col-md-4 mt-4">
+                <div class="form-check form-check-custom form-check-solid">
+                    <textarea id="{{ question_form.question_text.name }}" name="{{ question_form.question_text.name }}" class="form-control" placeholder="What is your question?" data-kt-autosize="true"></textarea>
+                    {{ question_form.question_text.errors }}
+                </div>
+            </div>
+            <div class="col-md-4 mt-4">
+              <div class="input-group mb-5">
+                <span class="input-group-text">Marks</span>
+                <input type="number" placeholder="0" name="{{ question_form.marks.name }}" class="form-control" id="{{ question_form.marks.auto_id }}" aria-label="Marks"/>
+                {{ question_form.marks.errors }}
+              </div>
+            </div>
+          </div>
+          <div id="tfCorrectAnswer" class="mt-4 d-none" >
+            <label class="form-label">Correct Answer</label>
+                <input type="radio" name="{{ question_form.tf_correct_answer.name }}" class="form-check-input" placeholder="" value="True" {% if question_form.tf_correct_answer.value == True %} checked {% endif %}/>
+                <label class="form-check-label">True</label>
+                <input type="radio" name="{{ question_form.tf_correct_answer.name }}" class="form-check-input" placeholder="" value="False" {% if question_form.tf_correct_answer.value == False %} checked {% endif %} />
+                <label class="form-check-label">False</label>
+                {{ question_form.tf_correct_answer.errors }}
+                <button type="button" class="btn btn-primary prev_step">Previous</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+  </div>
+  <div id="additionalOptionMultipleChoice" class="mt-4 d-none">
+        <!--begin::Repeater-->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label class="form-label">Option</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Correct Answer</label>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Delete Option</label>
+            </div>
+        </div>
+
+        {{ option_formset.management_form }}
+        <div id="form_groups_container">
+            {% for form in option_formset %}
+                <div class="form-group" id="form_group_{{ forloop.counter }}">
+                    <div class="form-group row mt-2">
+                        <div class="col-md-4">
+                            <input type="text" name="{{ form.option_text.html_name }}" class="form-control mb-2 mb-md-0" placeholder="Option" value="" />
+                            {{ form.option_text.errors }}
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                            <div class="form-check form-check-custom form-check-solid">
+                                <input type="checkbox" name="{{ form.is_correct.html_name }}" class="form-check-input" id="{{ form.is_correct.auto_id }}" {% if form.is_correct.value %}checked{% endif %}>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                            <a href="javascript:;" class="btn btn-sm btn-light-danger delete_option" data-target="form_group_template">
+                                <i class="ki-duotone ki-trash fs-5 pe-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="form-group mt-5">
+            <a id="add_more" href="javascript:;" class="btn btn-light">
+                <i class="ki-duotone ki-plus fs-3 pe-0"></i>
+                Option
+            </a>
+        </div>
+        <button type="button" class="btn btn-primary prev_step">Previous</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+<div id="form_group_template" style="display: none;">
+    <div class="form-group row mt-2">
+        <div class="col-md-4">
+            <input type="text" name="form-0-option_text" class="form-control mb-2 mb-md-0" placeholder="Option" value="" />
+            <span class="option_text_errors"></span>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <div class="form-check form-check-custom form-check-solid">
+                <input type="checkbox" name="form-0-is_correct" class="form-check-input" id="form-0-is_correct">
+            </div>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <a href="javascript:;" class="btn btn-sm btn-light-danger delete_option" data-target="form_group_template">
+                <i class="ki-duotone ki-trash fs-5 pe-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
