@@ -8,10 +8,45 @@
     <h1>Create Quiz - Step 1: Quiz Settings</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Next</button>
+        <div class="form-group" >
+          <div class="form-group mt-2">
+                <div class="col-md-4 mt-4">
+                      <div class="">
+                          <input type="text" name="{{ form.title.html_name }}" class="form-control mb-2 mb-md-0" placeholder="Title" value="" />
+                          {{ form.title.errors }}
+                      </div>
+                </div>
+
+              <div class="col-md-4 mt-4">
+                  <div class="form-check form-check-custom form-check-solid">
+                      <textarea id="{{ form.description.name }}" name="{{ form.description.name }}" class="form-control" placeholder="Add some description .." data-kt-autosize="true"></textarea>
+                      {{ form.description.errors }}
+                  </div>
+              </div>
+              <div class="col-md-4 mt-4">
+                <div class="input-group mb-5">
+                  <span class="input-group-text">Passing Score</span>
+                  <input type="number" placeholder="50" name="{{ form.passing_score.name }}" class="form-control" id="{{ form.passing_score.auto_id }}" aria-label="Passing Score"/>
+                  {{ form.passing_score.errors }}
+                </div>
+              </div>
+              <div class="col-md-4 mt-4">
+                <div class="input-group mb-5">
+                  <span class="input-group-text">Time Limit</span>
+                  <input type="number" placeholder="60" name="{{ form.time_limit.name }}" class="form-control" id="{{ form.time_limit.auto_id }}" aria-label="Time Limit"/>
+                  <span class="input-group-text">Min</span>
+                  {{ form.time_limit.errors }}
+                </div>
+              </div>
+              <div class="col-md-4 mt-4">
+                <div class="input-group mb-5">
+                  <span class="input-group-text">Difficulty Level</span>
+                  <input type="text" placeholder="Easy" name="{{ form.difficulty_level.name }}" class="form-control" id="{{ form.difficulty_level.auto_id }}" aria-label="Difficulty Level"/>
+                  {{ form.difficulty_level.errors }}
+                </div>
+              </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Quiz</button>
     </form>
-
-
-
 {% endblock content %}
