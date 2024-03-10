@@ -66,21 +66,17 @@ def add_question(request):
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)
         option_formset = OptionFormSet(request.POST)
-        print('request.POST', request.POST)
-        print('question_form.is_valid() ', question_form.is_valid() , ' option_formset.is_valid()',  option_formset.is_valid())
-
         if question_form.is_valid() and option_formset.is_valid():
             question = question_form.save(commit=False)
             question.quiz = get_object_or_404(Quiz, id=quiz_id)
             question.save()
-
-            print('option_formset', option_formset)
             for form in option_formset:
                 option_text = form.cleaned_data.get('option_text')
                 is_correct = form.cleaned_data.get('is_correct')
                 if option_text:
                     Option.objects.create(question=question, option_text=option_text, is_correct=is_correct)
             return redirect('quiz:add_question')
+
     else:
         question_form = QuestionForm()
         option_formset = OptionFormSet()
