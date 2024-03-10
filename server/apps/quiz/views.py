@@ -62,7 +62,6 @@ def add_question(request):
     quiz_id = request.session.get('quiz_id')
     if not quiz_id:
         return redirect('create_quiz_settings')
-
     if request.method == 'POST':
         question_form = QuestionForm(request.POST)
         option_formset = OptionFormSet(request.POST)
@@ -80,7 +79,9 @@ def add_question(request):
     else:
         question_form = QuestionForm()
         option_formset = OptionFormSet()
-    context = {'question_form': question_form, 'option_formset': option_formset}
+    questions_list = Question.objects.filter(quiz__id=quiz_id)
+    print('questions_list', questions_list)
+    context = {'question_form': question_form, 'option_formset': option_formset, 'questions_list': questions_list}
     context = KTLayout.init(context)
     KTTheme.addCssFile('css/create_quiz.css')
     KTTheme.addJavascriptFile('plugins/custom/formrepeater/formrepeater.bundle.js')

@@ -163,6 +163,7 @@ TEMPLATES = [{
         ],
         'libraries': {
             'theme': '_keenthemes.templatetags.theme',
+            'custom_filters': 'templatetags.custom_filters',
         },
         'builtins': [
             'django.templatetags.static',
