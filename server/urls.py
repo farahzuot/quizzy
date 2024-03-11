@@ -18,6 +18,7 @@ from health_check import urls as health_urls
 
 from server.apps.main import urls as main_urls
 from server.apps.quiz import urls as quiz_urls
+from server.apps.user_management.user import urls as user_urls
 
 from server.apps.main.views import MainView
 
@@ -27,6 +28,7 @@ urlpatterns = [
     # Apps:
     path('main/', include(main_urls, namespace='main')),
     path('quiz/', include(quiz_urls, namespace='quiz')),
+    path('accounts/', include(user_urls, namespace='user')),
 
     # Health checks:
     path('health/', include(health_urls)),
@@ -46,7 +48,7 @@ urlpatterns = [
     )),
 
     # It is a good practice to have explicit index view:
-    path('', MainView.as_view(template_name='main/index.html'), name='index'),
+    path('', MainView.as_view(template_name='main/index.html'), name='home'),
 ]
 
 if settings.DEBUG:  # pragma: no cover
