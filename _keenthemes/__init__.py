@@ -15,12 +15,14 @@ class KTLayout:
 
         # Set a default layout globally. Can be set in the page level view file as well.
         # See example in dashboards/views.py
-        context.update({
-            'layout': KTTheme.setLayout('default.html', context),
-            #'layout': KTTheme.setLayout('default_header_layout.html', context),
-            #'layout': KTTheme.setLayout('default_mini_sidebar_layout.html', context),
-            #'layout': KTTheme.setLayout('default_overlay_layout.html', context),
-        })
+        context.update(
+            {
+                "layout": KTTheme.setLayout("default.html", context),
+                #'layout': KTTheme.setLayout('default_header_layout.html', context),
+                #'layout': KTTheme.setLayout('default_mini_sidebar_layout.html', context),
+                #'layout': KTTheme.setLayout('default_overlay_layout.html', context),
+            }
+        )
 
         # Init the base theme settings
         KTBootstrap.init()

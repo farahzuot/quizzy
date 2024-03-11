@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -20,14 +21,12 @@ from django.urls import include, path
 from _keenthemes.views import SystemView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
+    path("admin/", admin.site.urls),
     # Dashboard urls
-    path('', include('dashboards.urls')),
-
+    path("", include("dashboards.urls")),
     # Auth urls
-    path('', include('auth.urls')),
+    path("", include("auth.urls")),
 ]
 
-handler404 = SystemView.as_view(template_name = 'pages/system/not-found.html', status=404)
-handler500 = SystemView.as_view(template_name = 'pages/system/error.html', status=500)
+handler404 = SystemView.as_view(template_name="pages/system/not-found.html", status=404)
+handler500 = SystemView.as_view(template_name="pages/system/error.html", status=500)

@@ -8,8 +8,8 @@ from _keenthemes.libs.theme import KTTheme
 
 
 class SystemView(TemplateView):
-    template_name = 'pages/system/not-found.html'
-    status = ''
+    template_name = "pages/system/not-found.html"
+    status = ""
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -20,9 +20,11 @@ class SystemView(TemplateView):
 
         # Define the layout for this module
         # _templates/layout/system.html
-        context.update({
-            'layout': KTTheme.setLayout('system.html', context),
-            'status': self.status,
-        })
+        context.update(
+            {
+                "layout": KTTheme.setLayout("system.html", context),
+                "status": self.status,
+            }
+        )
 
         return context

@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('quiz', '0002_alter_quiz_author'),
+        ("quiz", "0002_alter_quiz_author"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='question',
-            name='tf_correct_answer',
+            model_name="question",
+            name="tf_correct_answer",
             field=models.BooleanField(blank=True, null=True),
         ),
     ]

@@ -5,12 +5,12 @@ from django.db import models
 
 from server.apps.user_management.user.models import BaseUser
 
-
 # Create your models here.
+
 
 @final
 class Participant(BaseUser):
-    """ Quiz Participant model. """
+    """Quiz Participant model."""
 
     user = models.OneToOneField(
         User,
@@ -21,8 +21,8 @@ class Participant(BaseUser):
     )
 
     class Meta(object):
-        verbose_name = 'Participant'
-        verbose_name_plural = 'Participants'
+        verbose_name = "Participant"
+        verbose_name_plural = "Participants"
 
     def __str__(self) -> str:
         """Representation method."""

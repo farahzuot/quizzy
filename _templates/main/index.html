@@ -5,6 +5,8 @@
 {% block title %}{% translate "Dashboard" %}{% endblock %}
 
 {% block content %}
+<a href="{% url 'user:register' %}?account_type=author" class="btn btn-primary">Register as Quiz Author</a>
+<a href="{% url 'user:register' %}?account_type=participant" class="btn btn-primary">Create Participant Account</a>
 
 
 {% endblock content %}

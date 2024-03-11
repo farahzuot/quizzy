@@ -3,13 +3,16 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from server.apps.user_management.author.models import Author
+from server.apps.user_management.participant.models import Participant
+
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField()
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ["username", "email", "password1", "password2"]
 
 
 class LoginForm(forms.Form):
