@@ -5,7 +5,9 @@ from server.apps.user_management.author.models import Author
 
 
 class Quiz(BaseModel):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='quiz_author')
+    author = models.ForeignKey(
+        Author, on_delete=models.CASCADE, related_name="quiz_author"
+    )
     title = models.CharField(max_length=100)
     description = models.TextField()
     passing_score = models.PositiveIntegerField(blank=True, null=True)
@@ -13,24 +15,26 @@ class Quiz(BaseModel):
     time_limit = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta(object):
-        verbose_name = 'Quiz'
-        verbose_name_plural = 'Quizzes'
+        verbose_name = "Quiz"
+        verbose_name_plural = "Quizzes"
 
     def __str__(self):
         return self.title
 
 
 class Question(BaseModel):
-    MULTIPLE_CHOICE = 'mc'
-    TRUE_FALSE = 'tf'
+    MULTIPLE_CHOICE = "mc"
+    TRUE_FALSE = "tf"
 
     QUESTION_TYPES = [
-        (MULTIPLE_CHOICE, 'Multiple Choice'),
-        (TRUE_FALSE, 'True/False'),
+        (MULTIPLE_CHOICE, "Multiple Choice"),
+        (TRUE_FALSE, "True/False"),
     ]
 
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
-    question_type = models.CharField(max_length=2, choices=QUESTION_TYPES, default=TRUE_FALSE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name="questions")
+    question_type = models.CharField(
+        max_length=2, choices=QUESTION_TYPES, default=TRUE_FALSE
+    )
     question_text = models.TextField()
     marks = models.PositiveIntegerField(blank=True, null=True)
     tf_correct_answer = models.BooleanField(null=True, blank=True)
@@ -40,7 +44,9 @@ class Question(BaseModel):
 
 
 class Option(BaseModel):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='options')
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="options"
+    )
     option_text = models.CharField(max_length=100)
     is_correct = models.BooleanField(default=False)
 

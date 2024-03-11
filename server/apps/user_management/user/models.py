@@ -6,7 +6,7 @@ from server.apps.main.models import BaseModel
 
 # Create your models here.
 class BaseUser(BaseModel):
-    """ Quiz Participant model. """
+    """Quiz Participant model."""
 
     phone_number = models.CharField(
         max_length=100,
@@ -16,7 +16,7 @@ class BaseUser(BaseModel):
         max_length=100,
         blank=True,
     )
-    date_of_birth = models.DateTimeField(auto_now=False, blank=True, null=True)
+    date_of_birth = models.DateField(auto_now=False, blank=True, null=True)
     active = "active"
     inactive = "inactive"
     status_select = [
@@ -31,4 +31,3 @@ class BaseUser(BaseModel):
 
     class Meta:
         abstract = True
-

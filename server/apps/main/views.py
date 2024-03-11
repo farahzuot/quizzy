@@ -9,7 +9,7 @@ from _keenthemes.libs.theme import KTTheme
 class MainView(TemplateView):
     # Default template file
     # Refer to dashboards/urls.py file for more pages and template files
-    template_name = 'main/index.html'
+    template_name = "main/index.html"
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -30,6 +30,6 @@ class MainView(TemplateView):
         context = KTLayout.init(context)
 
         # Include vendors and javascript files for dashboard widgets
-        KTTheme.addVendors(['amcharts', 'amcharts-maps', 'amcharts-stock'])
+        KTTheme.addVendors(["amcharts", "amcharts-maps", "amcharts-stock"])
 
         return context
