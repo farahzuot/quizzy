@@ -42,7 +42,7 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'django.contrib.admindocs',
 
     # Security:
-    'axes',
+    # 'axes'
 
     # Health checks:
     # You may want to enable other checks as well,
@@ -73,7 +73,7 @@ MIDDLEWARE: Tuple[str, ...] = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Axes:
-    'axes.middleware.AxesMiddleware',
+    # 'axes.middleware.AxesMiddleware',
 
     # Django HTTP Referrer Policy:
     'django_http_referrer_policy.middleware.ReferrerPolicyMiddleware',
@@ -185,7 +185,7 @@ MEDIA_ROOT = BASE_DIR.joinpath('media')
 # https://docs.djangoproject.com/en/4.2/topics/auth/
 
 AUTHENTICATION_BACKENDS = (
-    'axes.backends.AxesBackend',
+    # 'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
