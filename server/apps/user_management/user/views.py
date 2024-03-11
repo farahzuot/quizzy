@@ -5,9 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from _keenthemes import KTLayout
 from server.apps.user_management.user.forms import (
     LoginForm,
-    RegisterAuthorForm,
     RegisterForm,
-    RegisterParticipantForm,
 )
 
 # Create your views here.
