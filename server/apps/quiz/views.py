@@ -6,12 +6,14 @@ from _keenthemes.__init__ import KTLayout
 from _keenthemes.libs.theme import KTTheme
 from server.apps.quiz.forms import OptionFormSet, QuestionForm, QuizForm
 from server.apps.quiz.models import Option, Question, Quiz
+from server.apps.user_management.author.models import Author
+from server.permissions import AuthorPermissionMixin
 
 
 # Create your views here.
 
 
-class CreateQuizSettings(FormView):
+class CreateQuizSettings(AuthorPermissionMixin, FormView):
     form_class = QuizForm
     template_name = "quiz/quiz_create_settings.html"
 
@@ -28,7 +30,7 @@ class CreateQuizSettings(FormView):
         return context
 
 
-class AddQuestion(View):
+class AddQuestion(AuthorPermissionMixin, View):
     template_name = "quiz/quiz_add_question.html"
     css_files = ["css/create_quiz.css"]
     js_files = ["plugins/custom/formrepeater/formrepeater.bundle.js",
@@ -46,16 +48,10 @@ class AddQuestion(View):
         if not quiz_id:
             return redirect("create_quiz_settings")
         context = self.get_context_data(request)
-        if self.forms_are_valid(request, context):
+        if context['question_form'].is_valid() and context['option_formset'].is_valid():
             self.save_question_and_options(context, quiz_id)
             return redirect("quiz:add_question")
         return render(request, self.template_name, context)
-
-    def forms_are_valid(self, request, context):
-        return (
-            context['question_form'].is_valid()
-            and context['option_formset'].is_valid()
-        )
 
     def save_question_and_options(self, context, quiz_id):
         question = context['question_form'].save(commit=False)
@@ -91,10 +87,14 @@ class AddQuestion(View):
         return context
 
 
-class ListQuizView(ListView):
+class ListQuizView(AuthorPermissionMixin, ListView):
     model = Quiz
     template_name = "quiz/quiz_list.html"
     context_object_name = "quizzes"
+
+    def get_queryset(self):
+        author = get_object_or_404(Author, user=self.request.user)
+        return Quiz.objects.filter(author=author)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
