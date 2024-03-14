@@ -6,21 +6,39 @@
 
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col-3 p-5">
+  <div class="row pb-5">
+    <div class="col d-flex justify-content-end">
       <a href="{% url 'quiz:create_quiz' %}" class="btn btn-dark mt-4" id="">Create Quiz</a>
     </div>
   </div>
-    <div class="row">
-    <h1>Quiz List</h1>
-    <ul>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-rounded table-striped border gy-7 gs-7 bg-white">
+        <thead>
+        <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+          <th>Title</th>
+          <th>Passing Score</th>
+          <th>Difficulty Level</th>
+          <th>Time Limit</th>
+          <th>Created Date</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for quiz in quizzes %}
-            <li>{{ quiz.title }}</li>
+        <tr>
+          <td>{{ quiz.title }}</td>
+          <td>{{ quiz.passing_score }}</td>
+          <td>{{ quiz.difficulty_level }}</td>
+          <td>{{ quiz.time_limit }}</td>
+          <td>{{ quiz.created_at }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+
+        </tbody>
+      </table>
+    </div>
+
   </div>
-</div>
 
 
-
-{% endblock content %}
+  {% endblock content %}
