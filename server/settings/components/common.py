@@ -344,3 +344,24 @@ KT_THEME_VENDORS = {
         "js": ["plugins/custom/bootstrap-select/bootstrap-select.bundle.js"],
     },
 }
+
+
+# settings.py
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',  # Change this to 'WARNING' or 'ERROR' to suppress NPlusOneError
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}

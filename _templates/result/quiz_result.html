@@ -1,0 +1,16 @@
+
+{% extends 'layout/default.html' %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block content %}
+    <h1>Your Quiz Result</h1>
+    <p>Score: {{ quiz_result.score }}</p>
+    {% if quiz_result.passed %}
+    <p>Congratulations! You passed the quiz.</p>
+    {% else %}
+    <p>Sorry! You didn't pass the quiz.</p>
+    {% endif %}
+{% endblock content %}

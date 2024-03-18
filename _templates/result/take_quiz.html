@@ -1,0 +1,41 @@
+{% extends 'layout/default.html' %}
+
+{% load custom_filters %}
+
+{% load i18n %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block content %}
+<h1>{{ quiz.title }}</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ answers_formset.management_form }}
+  <div id="form_groups_container">
+    {% for question, form in question_form_pairs %}
+    <div class="question-answer">
+      <h3>{{ question.question_text }}</h3>
+      {% if question.question_type == "mc" %}
+        {% with question|get_options as options %}
+          {% for option in options %}
+            <input type="checkbox" name="answers_{{ question.id }}" value="{{ option.id }}"/>
+            {{ option.option_text }}
+          {% endfor %}
+        {% endwith %}
+      {% elif question.question_type == "tf" %}
+      <label>
+        <input type="radio" name="{{ form.tf_answer.html_name }}" value="true">
+        True
+      </label>
+      <label>
+        <input type="radio" name="{{ form.tf_answer.html_name }}" value="false">
+        False
+      </label>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  <button type="submit">Submit</button>
+</form>
+
+{% endblock content %}
