@@ -5,8 +5,28 @@
 {% block title %}{% translate "Dashboard" %}{% endblock %}
 
 {% block content %}
-<a href="{% url 'user:register' %}?account_type=author" class="btn btn-primary">Register as Quiz Author</a>
-<a href="{% url 'user:register' %}?account_type=participant" class="btn btn-primary">Create Participant Account</a>
-
+<a href="{% url 'user:register' %}?account_type=author" class="btn btn-light">Register as Author</a>
+<a href="{% url 'user:register' %}?account_type=participant" class="btn btn-light">Register as Participant</a>
+<div class="container">
+  <div class="row">
+    {% for quiz in quizzes %}
+    <div class="col-3 mt-4">
+      <a href="{% url 'result:take_quiz' quiz.id %}" class="card hover-elevate-up shadow-sm parent-hover">
+        <div class="card-body d-flex align-items">
+        <span class="">
+              <i class="ki-duotone ki-abstract-24">
+               <span class="path1"></span>
+               <span class="path2"></span>
+              </i>
+        </span>
+          <span class="quiz-title ms-3 text-gray-700 parent-hover-primary fs-6 fw-bold">
+            {{ quiz.title }}
+        </span>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock content %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from server.apps.result.models import QuizResult, UserAnswer
+from server.apps.result.models import QuizResult, UserAnswer, UserAnswerOption
 
 
 # Register your models here.
@@ -20,3 +20,4 @@ class UserAnswerAdmin(admin.ModelAdmin):
 
 admin.site.register(QuizResult, QuizResultAdmin)
 admin.site.register(UserAnswer, UserAnswerAdmin)
+admin.site.register(UserAnswerOption)

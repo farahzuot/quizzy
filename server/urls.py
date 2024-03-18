@@ -22,6 +22,7 @@ from server.apps.quiz import urls as quiz_urls
 from server.apps.user_management.author import urls as author_urls
 from server.apps.user_management.participant import urls as participant_urls
 from server.apps.user_management.user import urls as user_urls
+from server.apps.result import urls as result_urls
 
 admin.autodiscover()
 
@@ -32,6 +33,7 @@ urlpatterns = [
     path("accounts/", include(user_urls, namespace="user")),
     path("author/", include(author_urls, namespace="author")),
     path("participant/", include(participant_urls, namespace="participant")),
+    path("result/", include(result_urls, namespace="result")),
     # Health checks:
     path("health/", include(health_urls)),
     # django-admin:

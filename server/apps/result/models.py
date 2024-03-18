@@ -24,13 +24,8 @@ class UserAnswer(BaseModel):
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="user_answers"
     )
-    answer = models.ForeignKey(
-        Option,
-        on_delete=models.CASCADE,
-        related_name="user_answers",
-        blank=True,
-        null=True,
-    )
+
+    tf_answer = models.BooleanField(null=True, blank=True)
     result = models.ForeignKey(
         QuizResult, on_delete=models.CASCADE, related_name="answers"
     )
@@ -45,3 +40,19 @@ class UserAnswer(BaseModel):
 
     def __str__(self):
         return f"{self.participant.user.username}'s answer to {self.question.question_text}"
+
+
+class UserAnswerOption(BaseModel):
+    user_answer = models.ForeignKey(
+        UserAnswer, on_delete=models.CASCADE, related_name="correct_options"
+    )
+    option = models.ForeignKey(
+        Option,
+        on_delete=models.CASCADE,
+        related_name="user_answer_options",
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        return f"{self.id}"
