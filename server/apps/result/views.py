@@ -3,7 +3,7 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, redirect
 from requests import Response
 
-from _keenthemes import KTLayout
+from _keenthemes import KTLayout, KTTheme
 from .forms import UserAnswerForm
 from .models import Quiz, UserAnswer, Question, Option, QuizResult, UserAnswerOption
 
@@ -36,38 +36,8 @@ def take_quiz(request, quiz_id):
         'question_form_pairs': zip(questions, answers_formset)
     }
     context = KTLayout.init(context)
+    KTTheme.addCssFile("css/style.css")
     return render(request, 'result/take_quiz.html', context)
-
-
-# def take_quiz(request, quiz_id):
-#     quiz = get_object_or_404(Quiz, id=quiz_id)
-#     questions = quiz.questions.prefetch_related('options')
-#
-#     if request.method == 'POST':
-#         participant = request.user.participant  # Assuming you have a Participant model related to User
-#         quiz_result, created = QuizResult.objects.get_or_create(
-#             quiz=quiz, participant=participant
-#         )
-#         score = 0
-#         for question in questions:
-#             answer_id = request.POST.get(f'question_{question.id}', None)
-#             if answer_id:
-#                 answer = Option.objects.get(id=answer_id)
-#                 UserAnswer.objects.create(
-#                     participant=participant,
-#                     question=question,
-#                     answer=answer,
-#                     result=quiz_result
-#                 )
-#                 if answer.is_correct:
-#                     score += question.marks
-#         quiz_result.score = score
-#         quiz_result.passed = score >= quiz.passing_score if quiz.passing_score else None
-#         quiz_result.save()
-#         return redirect('quiz_result', quiz_result_id=quiz_result.id)
-#
-#     context = {'quiz': quiz, 'questions': questions}
-#     return render(request, 'result/take_quiz.html', context)
 
 
 def quiz_result(request, quiz_result_id):

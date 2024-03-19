@@ -211,8 +211,8 @@ fabric.properties
 
 #####=== Custom ===#####
 # Directories:
+assets/
 media/
-
 # File types:
 *.sqlite3
 *.db
