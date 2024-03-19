@@ -19,5 +19,5 @@ class MainView(ListView):
         context = super().get_context_data(**kwargs)
         context = KTLayout.init(context)
         KTTheme.addJavascriptFile("js/home.js")
-        KTTheme.addCssFile("css/home.css")
+        KTTheme.addCssFile("css/style.css")
         return context

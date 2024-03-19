@@ -1,0 +1,9 @@
+#kt_app_header, #kt_app_wrapper {
+  left : 0!important;
+  margin-left: 0 !important;
+}
+
+.custom-logo{
+ width: 70px;
+  height: 70px;
+}

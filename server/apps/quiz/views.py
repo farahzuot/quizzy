@@ -27,12 +27,13 @@ class CreateQuizSettings(AuthorPermissionMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context = KTLayout.init(context)
+        KTTheme.addCssFile("css/style.css")
         return context
 
 
 class AddQuestion(AuthorPermissionMixin, View):
     template_name = "quiz/quiz_add_question.html"
-    css_files = ["css/create_quiz.css"]
+    css_files = ["css/create_quiz.css", "css/style.css"]
     js_files = ["plugins/custom/formrepeater/formrepeater.bundle.js",
                 "js/create_quiz.js"]
 
@@ -99,4 +100,5 @@ class ListQuizView(AuthorPermissionMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context = KTLayout.init(context)
+        KTTheme.addCssFile("css/style.css")
         return context
