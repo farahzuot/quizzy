@@ -3,25 +3,34 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 
 from _keenthemes import KTLayout
+from server.apps.user_management.author.forms import RegisterAuthorForm
+from server.apps.user_management.participant.forms import RegisterParticipantForm
 from server.apps.user_management.user.forms import (
     LoginForm,
     RegisterForm,
 )
 
+
 # Create your views here.
 
 
 def register(request):
-    account_type = request.GET.get("account_type")
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            request.session["user_id"] = str(user.id)
-            if account_type == "author":
-                return redirect("author:register_author")
-            elif account_type == "participant":
-                return redirect("participant:register_participant")
+            participant_form = RegisterParticipantForm(request.POST)
+            author_form = RegisterAuthorForm(request.POST)
+            if author_form.is_valid():
+                author_form = RegisterAuthorForm(request.POST)
+                author = author_form.save(commit=False)
+                author.user = get_object_or_404(User, id=user.id)
+                author.save()
+                participant = participant_form.save(commit=False)
+                participant.user = get_object_or_404(User, id=user.id)
+                participant.save()
+                author.save()
+                return redirect("user:login")
     else:
         form = RegisterForm()
     context = {"form": form}
