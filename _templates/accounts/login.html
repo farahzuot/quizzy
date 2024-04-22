@@ -5,37 +5,81 @@
 {% block title %}{% translate "Register" %}{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-center">
-<form method="post" class="w-75" id="signupForm">
-  {% csrf_token %}
-  <div class="d-flex flex-column gap-4 bg-white rounded p-6 shadow-sm">
-    {% if user.is_authenticated %}
-    <p>You already logged in. <span><a href="{% url 'user:logout' %}">Logout?</a></span></p>
-    {% else %}
-    <h2 class="form-label fs-3">Log In To Your Account</h2>
-    <div>
-      <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="Username"
-             aria-label="Username" aria-describedby="basic-addon1" required/>
-      {% for error in form.username.errors %}
-      <div style="color: red;">
-        {{ error }}
-      </div>
-      {% endfor %}
-    </div>
-    <div>
-      <input type="password" name="{{ form.password.name }}" class="form-control" placeholder="Enter your password"
-             aria-label="Password" aria-describedby="basic-addon1" required/>
-      {% for error in form.password.errors %}
-      <div style="color: red;">
-        {{ error }}
-      </div>
-      {% endfor %}
-    </div>
-    <button type="submit" class="btn btn-primary mt-6 align-self-end">Sign In</button>
-    {% endif %}
-  </div>
-</form>
 
-</div>
+<form method="post" class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/" action="#">
+  {% csrf_token %}
+  {% if user.is_authenticated %}
+  <p>You already logged in. <span><a href="{% url 'user:logout' %}">Logout?</a></span></p>
+  {% else %}
+  <!--begin::Heading-->
+  <div class="text-center mb-11">
+    <!--begin::Title-->
+    <h1 class="text-dark fw-bolder mb-3">
+      Log Into Quizzy
+    </h1>
+    <!--end::Title-->
+  </div>
+  <!--begin::Heading-->
+
+
+  <!--begin::Input group--->
+  <div class="fv-row mb-8">
+    <!--begin::Email-->
+    <input type="text" placeholder="Username" name="{{ form.username.name }}" autocomplete="off"
+           class="form-control bg-transparent"/>
+    <!--end::Email-->
+    {% for error in form.username.errors %}
+    <div style="color: red;">
+      {{ error }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <!--end::Input group--->
+  <div class="fv-row mb-3">
+    <!--begin::Password-->
+    <input type="password" placeholder="Password" name="{{ form.password.name }}" autocomplete="off"
+           class="form-control bg-transparent"/>
+    <!--end::Password-->
+    {% for error in form.password.errors %}
+    <div style="color: red;">
+      {{ error }}
+    </div>
+    {% endfor %}
+  </div>
+  <!--end::Input group--->
+
+  <!--begin::Wrapper-->
+  <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+    <div></div>
+
+    <!--begin::Link-->
+    <a href="/reset-password" class="link-primary">
+      Forgot Password ?
+    </a>
+    <!--end::Link-->
+  </div>
+  <!--end::Wrapper-->
+
+  <!--begin::Submit button-->
+  <div class="d-grid mb-10">
+    <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+      {% include 'partials/general/_button-indicator.html' with label='Sign In' %}
+    </button>
+  </div>
+  <!--end::Submit button-->
+
+  <!--begin::Sign up-->
+  <div class="text-gray-500 text-center fw-semibold fs-6">
+    Not a Member yet?
+
+    <a href="{% url 'user:register' %}" class="link-primary">
+      Sign up
+    </a>
+  </div>
+  <!--end::Sign up-->
+  {% endif %}
+</form>
+<!--end::Form-->
 
 {% endblock content %}
